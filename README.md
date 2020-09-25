@@ -68,8 +68,8 @@ ref
 # steps
 ## init project
 1. `npx create-react-app@latest hennge_challenge` create init project
-2. add eslint, prettier and husky for pre-commit to check lint
-3. add styled-component
+2. add `eslint`, `prettier` and `husky` for pre-commit to check lint
+3. add `storybook` for develop UI components
 
 # CHALLENGE DETAILS
 Description
