@@ -20,7 +20,6 @@
 - add eslint
 - add hooks
 
-
 ref
 - https://challenge.hennge.com/challenge-details/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsiZmxhbWVkZGRAaG90bWFpbC5jb20iXSwiaXNzIjoiaGVubmdlLWFkbWlzc2lvbi1jaGFsbGVuZ2UiLCJzdWIiOiJjaGFsbGVuZ2UifQ.8l93jN79xudYDphEl9cBAn9UKo2SfDgx6oOTMRWC_Z4
 
@@ -65,6 +64,12 @@ ref
 - 不要
 
 那版面要怎麼處理？
+
+# steps
+## init project
+1. `npx create-react-app@latest hennge_challenge` create init project
+2. add eslint, prettier and husky for pre-commit to check lint
+3. add styled-component
 
 # CHALLENGE DETAILS
 Description
