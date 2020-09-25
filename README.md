@@ -70,6 +70,7 @@ ref
 1. `npx create-react-app@latest hennge_challenge` create init project
 2. add `eslint`, `prettier` and `husky` for pre-commit to check lint
 3. add `storybook` for develop UI components
+4. add `styled-components` for style (and add normalize.css global css)
 
 # CHALLENGE DETAILS
 Description
