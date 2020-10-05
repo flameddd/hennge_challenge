@@ -1,4 +1,4 @@
-import { fillDateDigital, dateTimeFormatter } from "./index";
+import { fillDateDigital, dateTimeFormatter, sortMail } from "./index";
 
 describe("fillDateDigital test", () => {
   test('expect return "", when typeof input is NOT "number"', () => {
@@ -81,5 +81,47 @@ describe("dateTimeFormatter test", () => {
       date
     )}`;
     expect(dateTimeFormatter(baseDate, input)).toEqual(expect1);
+  });
+});
+
+describe("sortMail test", () => {
+  let data;
+  const email1 = {
+    from: "aaa@example.com",
+    date: new Date(2020, 0, 3, 0, 20, 0),
+  };
+  const email2 = {
+    from: "bbb.bbbb@exam.com.jp",
+    date: new Date(2020, 0, 3, 0, 10, 0),
+  };
+  const email3 = {
+    from: "ccc@example.com",
+    date: new Date(2020, 0, 3, 0, 0, 0),
+  };
+
+  beforeEach(() => {
+    data = [email1, email2, email3];
+  });
+
+  test('expect return array data order by "from" field', () => {
+    const expectOrderByASC = [email1, email2, email3];
+    const expectOrderByDESC = [email3, email2, email1];
+    expect(sortMail({ data, sortField: "from", orderBy: "asc" })).toEqual(
+      expectOrderByASC
+    );
+    expect(sortMail({ data, sortField: "from", orderBy: "desc" })).toEqual(
+      expectOrderByDESC
+    );
+  });
+
+  test('expect return array data order by "date" field', () => {
+    const expectOrderByASC = [email3, email2, email1];
+    const expectOrderByDESC = [email1, email2, email3];
+    expect(sortMail({ data, sortField: "date", orderBy: "asc" })).toEqual(
+      expectOrderByASC
+    );
+    expect(sortMail({ data, sortField: "date", orderBy: "desc" })).toEqual(
+      expectOrderByDESC
+    );
   });
 });

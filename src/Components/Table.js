@@ -208,7 +208,7 @@ const StyledArrow = styled(Icon_arrow01)`
 
   ${svgFillColor}
 
-  ${(props) => props.isRotateIcon && "transform: rotate(180deg);"}
+  ${(props) => props.isDESC && "transform: rotate(180deg);"}
 `;
 
 const StyledIcon_mail_sp = styled(Icon_mail_sp)`
@@ -255,9 +255,7 @@ export const Table = ({ data, ...props }) => {
         >
           From{" "}
           {sort.field === SORT_OPTIONS.FROM_FIELD && (
-            <StyledArrow
-              isRotateIcon={sort.orderBy === SORT_OPTIONS.ORDER_BY_ASC}
-            />
+            <StyledArrow isDESC={sort.orderBy === SORT_OPTIONS.ORDER_BY_DESC} />
           )}
         </SortableHeaderItem>
         <span>To</span>
@@ -268,9 +266,7 @@ export const Table = ({ data, ...props }) => {
         >
           Date{" "}
           {sort.field === SORT_OPTIONS.DATE_FIELD && (
-            <StyledArrow
-              isRotateIcon={sort.orderBy === SORT_OPTIONS.ORDER_BY_ASC}
-            />
+            <StyledArrow isDESC={sort.orderBy === SORT_OPTIONS.ORDER_BY_DESC} />
           )}
         </SortableHeaderItem>
       </Header>

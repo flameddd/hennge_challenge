@@ -60,14 +60,17 @@ export function sortMail({ data, sortField, orderBy }) {
   return data.sort((a, b) => {
     if (sortField === SORT_OPTIONS.FROM_FIELD) {
       // sort email.from field, case insensitive.
+      // Ascending : from A to Z.
+      // Descending: from Z to A.
       return orderBy === SORT_OPTIONS.ORDER_BY_DESC
-        ? a[sortField].toLowerCase().localeCompare(b[sortField].toLowerCase())
-        : b[sortField].toLowerCase().localeCompare(a[sortField].toLowerCase());
+        ? b[sortField].toLowerCase().localeCompare(a[sortField].toLowerCase())
+        : a[sortField].toLowerCase().localeCompare(b[sortField].toLowerCase());
     }
 
-    // sort email.ArchiveDate
+    // Ascending : The oldest dates will be at the top of the list.
+    // Descending: The most recent/latest dates will be at the top of the list.
     return orderBy === SORT_OPTIONS.ORDER_BY_DESC
-      ? a[sortField] < b[sortField]
-      : a[sortField] > b[sortField];
+      ? b[sortField] - a[sortField]
+      : a[sortField] - b[sortField];
   });
 }

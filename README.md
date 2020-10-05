@@ -66,6 +66,9 @@ ref
 
 - 20201005 我先來整理 style，我想要先 commit 一次
   - sort mail 還沒有 unit test
+  - 持續懷疑該拿 date 怎麼辦
+  - 靠妖，差點忘了有 extend 功能
+  - 補上了 sort unit test、花時間弄清楚 asc, desc 的邏輯與設計
 
 元件（盡量拆小一點）
 - css normalize
