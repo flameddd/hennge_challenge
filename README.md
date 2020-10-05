@@ -12,6 +12,8 @@
   - 別忘了 mobile 的 input
 - 結圖，丟到網路上做 color analysis 產 css color
   - https://mdigi.tools/color-extractor/
+  - https://colorate.azurewebsites.net/Color/3F3F3F
+  - https://imagecolorpicker.com/
   - color 命名可以參考各大網站 css 變數
   - 這段可以寫在說明上，顏色方面我找工具分析顏色來使用
 - 我可以加入 storybook 寫喔！
@@ -31,14 +33,48 @@ ref
     - analysis design, then divide page into small components (tasks)
   - 先列出元件吧，要不要用 react date 再想看看
   - `npx create-react-app@latest hennge_challenge` init project
-  - 
+  - 今天算是只弄了 init project，這樣進度不行，要拉高一點
+- 20200928:14:48
+  - 混了兩天今天要有點進度阿
+  - 命名了 color
+  - 要把 mobile 跟 desktop 的 layout 想一下
+    - mobile 就 div, div, div 讓整個 scroll，上面考慮用 fix 滑下來
+    - desktop 就要指定外層高度，要把下面的空間佔滿 flex 0 0 1 
+  - 先弄 search bar
+    - 先弄了 UI，還有 toggle 還沒出來... 可以玩玩 grid 喔!，但 UI logic 其實很複雜
+  - 下午弄 table，今天想弄完，思考到底要用哪種 tag
+    - 有 mobile mode，我用 div 是不是比較好處理?
+    - breaking point 要設定多少? -> 600px
+    - table 基本樣子有了
+    - 還差很多，還有排序、還有 mobile 明天要在加油
+- 20200929:10:55 繼續吧
+  - table 繼續，要先弄哪塊? 先 mobile ?
+  - 把 data 準備起來
+  - sort 功能我再考慮看看吧，因為只要 UI mock，文件上並沒有說到要實現這個 feature
+  - 把 data 建立起來了
+  - 如果沒有要 date sort，那我可以先 date sort UI！因為如果不先弄，那後續 mobile 會不會比較麻煩？
+  - 先把 dataset 放進去吧
+  - 放進去了，接著呢？放入 sort 符號好了！跟 time render logic
+  - 好，desktop table 有基本了，換 mobile table
+
+- 20201004
+  - 今天終於面對現實一點了
+  - 把 flexbox 改用 grid 實現，到時候可以寫在 readme 中
+    - 說一開始思考要不要拆成兩個元件
+    - 決定用一個元件，然後 flexbox 處理
+    - 最後覺得太亂，改用 grid 處理
+
+- 20201005 我先來整理 style，我想要先 commit 一次
+  - sort mail 還沒有 unit test
 
 元件（盡量拆小一點）
 - css normalize
 - layout
   - 可能要看看 github iOS bug 那個 100vh
 - date selector
-- serach button
+  - UI
+  - logic
+  - serach button
 - Header
 - table title
 - table header (mobile)
