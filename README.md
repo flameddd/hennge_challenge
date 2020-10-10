@@ -21,6 +21,7 @@
 - add prettier
 - add eslint
 - add hooks
+- 說明方面，可以加上 file structure 幫忙 review 更快了解專案
 
 ref
 - https://challenge.hennge.com/challenge-details/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsiZmxhbWVkZGRAaG90bWFpbC5jb20iXSwiaXNzIjoiaGVubmdlLWFkbWlzc2lvbi1jaGFsbGVuZ2UiLCJzdWIiOiJjaGFsbGVuZ2UifQ.8l93jN79xudYDphEl9cBAn9UKo2SfDgx6oOTMRWC_Z4
@@ -69,6 +70,32 @@ ref
   - 持續懷疑該拿 date 怎麼辦
   - 靠妖，差點忘了有 extend 功能
   - 補上了 sort unit test、花時間弄清楚 asc, desc 的邏輯與設計
+  - 想想事情還差很多阿！！ extend, mobile extends, date picker, 真正的 react App 也沒有
+    - 明天，先把 data 加上 ID
+    - 抓圖 gmail, hotmail 的 deaktop, mobile 的樣子來 mockup
+    - mobile 的要 real device test、然後要有 scroll lock 不要 scroll 造成 extend
+- 20201006
+  - 先來加入 data ID
+  - 下午都再弄 extendmail。有點譜了
+  - shrink 的 button 還不是很好
+- 20201007 弄 date 嗎？
+  - 還缺 extend, mobile extends, date picker, 真正的 react App 也沒有
+  - mobile 要記得拿掉 height、scroll 
+  - 該不該自己做呢？
+  - 現在我卡甚麼問題，我要不要自己做 date picker
+  - 到時候就說，我猶豫要不要自己做，但有說明叫我別猶豫，決定不重覆造輪子！
+  - 選擇 lib 時，不採用 react-dates 因為有 monent js dep，這個 mockup 我不想用到這個
+      - 會用 react dates 可能是因為 airbnb 的業務
+    - 後來採用 https://github.com/hypeserver/react-date-range
+    - 但事過後發現，沒辦法 custom appear
+    - 改回 react-dates
+- 20201011
+  - extendmail 的 metadata, attach 還沒放、不知道要怎麼放
+  - 我要放 icon 嗎？
+
+
+要考慮改用 rem font-size
+
 
 元件（盡量拆小一點）
 - css normalize

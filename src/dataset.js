@@ -1,5 +1,6 @@
 export const emails = [
   {
+    id: "email1",
     from: "aaa@example.com",
     to: ["zzz.zzz@example.com"],
     metadata: "",
@@ -10,6 +11,7 @@ export const emails = [
     date: new Date(2020, 0, 3, 0, 20, 0),
   },
   {
+    id: "email2",
     from: "bbb.bbbb@exam.com.jp",
     to: ["yyy@example.com"],
     metadata: "",
@@ -20,6 +22,7 @@ export const emails = [
     date: new Date(2020, 0, 3, 0, 10, 0),
   },
   {
+    id: "email3",
     from: "ccc@example.com",
     to: ["xxx@example.com", "xxx2@example.com", "xxx3@example.com"],
     metadata: "+1",
@@ -30,6 +33,7 @@ export const emails = [
     date: new Date(2020, 0, 3, 0, 0, 0),
   },
   {
+    id: "email4",
     from: "ddd.dddd@exam.com.jp",
     to: ["vvv.vvv@example.com", "vvv.vvv2@example.com", "vvv.vvv3@example.com"],
     metadata: "+1",
@@ -41,7 +45,8 @@ export const emails = [
     date: new Date(2020, 0, 1, 0, 30, 0),
   },
   {
-    from: "2019/12/31 - 2020/1/3FromToSubject+1+1+2eee@example.com",
+    id: "email5",
+    from: "eee@example.com",
     to: [
       "sss@example.com",
       "sss2@example.com",
@@ -56,6 +61,7 @@ export const emails = [
     date: new Date(2020, 0, 1, 0, 20, 0),
   },
   {
+    id: "email6",
     from: "fff.ffff@example.com",
     to: ["qqq.qqq@example.com"],
     metadata: "",
@@ -78,6 +84,7 @@ export const emails = [
     date: new Date(2020, 0, 1, 0, 10, 0),
   },
   {
+    id: "email7",
     from: "ggg@example.com",
     to: ["ppp@example.com"],
     metadata: "",
@@ -88,6 +95,7 @@ export const emails = [
     date: new Date(2020, 0, 1, 0, 0, 0),
   },
   {
+    id: "email8",
     from: "hhh.hhh@examp.com",
     to: ["ooo.ooo@example.com"],
     metadata: "",
@@ -98,6 +106,7 @@ export const emails = [
     date: new Date(2020, 0, 1, 0, 0, 0),
   },
   {
+    id: "email9",
     from: "iii@example.com",
     to: ["nnn@example.com"],
     metadata: "",
@@ -108,6 +117,7 @@ export const emails = [
     date: new Date(2019, 11, 31, 0, 40, 0),
   },
   {
+    id: "email10",
     from: "Pablo-Diego@example.com",
     to: ["Pablo-Diego-José-Francisc@example.com"],
     metadata: "",

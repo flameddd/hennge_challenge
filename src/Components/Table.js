@@ -1,12 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
-import styled, { css } from "styled-components";
+import styled, { css, keyframes } from "styled-components";
 import { ReactComponent as Clip } from "../assets/icon_clip.svg";
 import { ReactComponent as Icon_arrow01 } from "../assets/icon_arrow01.svg";
 import { ReactComponent as Icon_arrow02 } from "../assets/icon_arrow02.svg";
 import { ReactComponent as Icon_mail_sp } from "../assets/icon_mail_sp.svg";
 import { BREAK_POINT_SM, SORT_OPTIONS } from "../constants";
 import { dateTimeFormatter, sortMail } from "../utils";
+import ExtendMail from "./ExtendMail";
 
 import {
   BORDER_COLOR,
@@ -16,6 +17,8 @@ import {
   WHITE_4,
   GRAY_4,
   BLACK_1,
+  LIGHT_BLUE_1,
+  LIGHT_CYAN_1,
 } from "../colors";
 
 const test = new Date(2020, 0, 3, 0, 20, 0);
@@ -211,7 +214,7 @@ const StyledArrow = styled(Icon_arrow01)`
   ${(props) => props.isDESC && "transform: rotate(180deg);"}
 `;
 
-const StyledIcon_mail_sp = styled(Icon_mail_sp)`
+const StyledIconMailSP = styled(Icon_mail_sp)`
   display: none;
 
   ${svgFillColor}
@@ -225,11 +228,71 @@ const StyledIcon_mail_sp = styled(Icon_mail_sp)`
   }
 `;
 
+const extendedStyle = css`
+  border: 2px solid ${LIGHT_BLUE_1};
+  border-radius: 10px;
+  margin: 4px 0;
+  position: relative;
+`;
+
+const ItemContainer = styled.div`
+  transition: margin 0.1s;
+  ${(props) => props.isExtended && extendedStyle}
+`;
+
+const fadeIn = keyframes`
+  0% {
+    height: 0;
+  }
+  100% {
+    height: 300px
+  }
+`;
+
+const StyledExtendMail = styled(ExtendMail)`
+  animation: 0.1s ${fadeIn} ease-out;
+  margin: 2px 6%;
+`;
+
+const Shrink = styled.div`
+  background-color: white;
+  border: 1px solid ${VIVID_NAVY_1};
+  border-radius: 50%;
+  cursor: pointer;
+  height: 20px;
+  padding: 10px;
+  transform: rotate(-90deg);
+  width: 20px;
+
+  position: absolute;
+  right: calc(3% - 20px);
+  top: 25px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  :hover {
+    background-color: ${LIGHT_CYAN_1};
+  }
+`;
+
 export const Table = ({ data, ...props }) => {
   const [sort, setSort] = React.useState({
     field: SORT_OPTIONS.DATE_FIELD,
     orderBy: SORT_OPTIONS.ORDER_BY_DESC,
   });
+  const [extendIDs, setExtendIDs] = React.useState([]);
+
+  const sortedDate = React.useMemo(
+    () =>
+      sortMail({
+        data,
+        sortField: sort.field,
+        orderBy: sort.orderBy,
+      }),
+    [data, sort.field, sort.orderBy]
+  );
 
   const onSetOrderBy = () =>
     sort.orderBy === SORT_OPTIONS.ORDER_BY_DESC
@@ -239,12 +302,6 @@ export const Table = ({ data, ...props }) => {
     field !== sort.field
       ? setSort({ field, orderBy: SORT_OPTIONS.ORDER_BY_DESC })
       : onSetOrderBy();
-
-  const sortedDate = sortMail({
-    data,
-    sortField: sort.field,
-    orderBy: sort.orderBy,
-  });
 
   return (
     <Container {...props}>
@@ -271,31 +328,59 @@ export const Table = ({ data, ...props }) => {
         </SortableHeaderItem>
       </Header>
       {sortedDate.map((email) => (
-        <TableItem key={email.subject}>
-          <StyledIcon_mail_sp />
-          <From isHighlightField={sort.field === SORT_OPTIONS.FROM_FIELD}>
-            <Text>{email.from}</Text>
-            {email.attachment && <StyledClip />}
-            <MobileArchiveDate
+        <ItemContainer key={email.id} isExtended={extendIDs.includes(email.id)}>
+          <TableItem
+            onClick={() => {
+              if (!extendIDs.includes(email.id)) {
+                setExtendIDs((prev) => prev.concat(email.id));
+              }
+            }}
+          >
+            <StyledIconMailSP />
+            <From isHighlightField={sort.field === SORT_OPTIONS.FROM_FIELD}>
+              <Text>{email.from}</Text>
+              {email.attachment && <StyledClip />}
+              <MobileArchiveDate
+                isHighlightField={sort.field === SORT_OPTIONS.DATE_FIELD}
+              >
+                {dateTimeFormatter(test, email.date)}
+              </MobileArchiveDate>
+              <StyledArrow2 />
+            </From>
+            <To>
+              <Text>{email.to.join(",")}</Text>
+              {email.metadata && <Tag>{email.metadata}</Tag>}
+            </To>
+            <MetaData>{email.metadata && <Tag>{email.metadata}</Tag>}</MetaData>
+            <Subject>{email.subject}</Subject>
+            <Attachment>{email.attachment && <StyledClip />}</Attachment>
+            <ArchiveDate
               isHighlightField={sort.field === SORT_OPTIONS.DATE_FIELD}
             >
               {dateTimeFormatter(test, email.date)}
-            </MobileArchiveDate>
-            <StyledArrow2 />
-          </From>
-          <To>
-            <Text>{email.to.join(",")}</Text>
-            {email.metadata && <Tag>{email.metadata}</Tag>}
-          </To>
-          <MetaData>{email.metadata && <Tag>{email.metadata}</Tag>}</MetaData>
-          <Subject>{email.subject}</Subject>
-          <Attachment>{email.attachment && <StyledClip />}</Attachment>
-          <ArchiveDate
-            isHighlightField={sort.field === SORT_OPTIONS.DATE_FIELD}
-          >
-            {dateTimeFormatter(test, email.date)}
-          </ArchiveDate>
-        </TableItem>
+            </ArchiveDate>
+          </TableItem>
+          {extendIDs.includes(email.id) && (
+            <React.Fragment>
+              <StyledExtendMail
+                from={email.from}
+                to={email.to}
+                metaData={email.metaData}
+                subject={email.subject}
+                body={email.body}
+                attachment={email.attachment}
+                date={email.date}
+              />
+              <Shrink
+                onClick={() =>
+                  setExtendIDs((prev) => prev.filter((id) => id !== email.id))
+                }
+              >
+                <StyledArrow2 />
+              </Shrink>
+            </React.Fragment>
+          )}
+        </ItemContainer>
       ))}
     </Container>
   );

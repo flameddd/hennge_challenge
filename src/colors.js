@@ -5,6 +5,8 @@ export const VIVID_NAVY_1 = "#1645e0";
 export const WHITE_4 = "#f6f8fa";
 export const GRAY_4 = "#8C8C8C";
 export const BLACK_1 = "#000000";
+export const LIGHT_BLUE_1 = "#add8e6";
+export const LIGHT_CYAN_1 = "#E0FFFF";
 
 // useless colors
 export const WHITE_2 = "#EFEFEF";
