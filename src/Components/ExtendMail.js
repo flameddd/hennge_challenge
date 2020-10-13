@@ -6,9 +6,6 @@ import { BORDER_COLOR } from "../colors";
 const Container = styled.div`
   border-right: 1px solid ${BORDER_COLOR};
   border-left: 1px solid ${BORDER_COLOR};
-  max-height: 300px;
-  overflow-x: hidden;
-  overflow-y: auto;
   padding: 0 15px;
 `;
 

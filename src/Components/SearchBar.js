@@ -10,6 +10,8 @@ import "react-dates/lib/css/_datepicker.css";
 import { DayPickerRangeController } from "react-dates";
 import moment from "moment";
 
+import { SMALL_WIDTH } from "../constants";
+
 const Container = styled.div`
   height: 36px;
 `;
@@ -99,7 +101,7 @@ export const SearchBar = ({ onSearch, ...props }) => {
       </SearchInput>
       {isOpen && (
         <DayPickerRangeController
-          numberOfMonths={2}
+          numberOfMonths={window.innerWidth < SMALL_WIDTH ? 1 : 2}
           onOutsideClick={(event) => {
             if (event.target !== inputEl.current) {
               setIsOpen(false);

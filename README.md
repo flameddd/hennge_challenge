@@ -92,7 +92,13 @@ ref
 - 20201011
   - extendmail 的 metadata, attach 還沒放、不知道要怎麼放
   - 我要放 icon 嗎？
-
+- 20201011
+  - 先妥協一下 mobile 的 date range picker
+  - 可以寫寫，我本來想要 hover 設計的，但設計上已經有 design 了所以沒弄
+- 20201013
+  - 整理 shrink button
+  - 今天弄 react app 吧!
+  - extendmail 的 height 記得拿掉
 
 要考慮改用 rem font-size
 
@@ -260,3 +266,58 @@ Transfer-Encoding: chunked
 # After successful
 - 你會收到 email （內含有你的 CV、cover letter link）
 - 公司收到後，engineers 會 review 你的內容，用 email 連絡你的結果
+
+
+
+
+
+import { BREAK_POINT_SM } from '../constants'
+
+export const HORIZONTAL_ORIENTATION = 'horizontal';
+export const VERTICAL_ORIENTATION = 'vertical';
+export const VERTICAL_SCROLLABLE = 'verticalScrollable';
+
+
+// withPortal={window.innerWidth < 600}
+// orientation={window.innerWidth > 600 ? "horizontal" : "verticalScrollable"}
+
+withPortal={true}
+orientation={"verticalScrollable"}
+//     orientation="verticalScrollable"
+
+
+
+    // withPortal={true} or with withFullScreenPortal={true}
+
+    // 判斷 windows size 有沒有超過 break point
+    // 有的話，有改
+    // orientation: PropTypes.oneOf([HORIZONTAL_ORIENTATION, VERTICAL_ORIENTATION]),
+//     verticalScrollable
+//     <DayPickerRangeController
+//     onDatesChange={aaa => console.log(aaa)}
+    
+//     startDate={null}
+//     endDate={null}
+    
+//     numberOfMonths={2} 
+//     hideKeyboardShortcutsPanel="true" 
+//     withPortal={true}
+//     orientation="verticalScrollable"
+// />
+// <DayPicker
+// orientation="verticalScrollable"
+// />
+
+
+
+
+// 標題要有特別標示嗎？
+// 標題樣式是？
+// H1 的 margin 有點太多了
+
+// from, to 要有標示嗎
+// 樣式是？
+
+// body 的 font size, line height, letter space 是？
+
+// attach, date 要放哪個位置

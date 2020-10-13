@@ -18,7 +18,6 @@ import {
   GRAY_4,
   BLACK_1,
   LIGHT_BLUE_1,
-  LIGHT_CYAN_1,
 } from "../colors";
 
 const test = new Date(2020, 0, 3, 0, 20, 0);
@@ -163,6 +162,8 @@ const Attachment = styled(Cell)``;
 const ArchiveDate = styled(Cell)``;
 
 const TableItem = styled.div`
+  position: relative;
+
   border-bottom: 1px solid ${BORDER_COLOR};
 
   display: grid;
@@ -232,11 +233,11 @@ const extendedStyle = css`
   border: 2px solid ${LIGHT_BLUE_1};
   border-radius: 10px;
   margin: 4px 0;
-  position: relative;
 `;
 
 const ItemContainer = styled.div`
   transition: margin 0.1s;
+  position: relative;
   ${(props) => props.isExtended && extendedStyle}
 `;
 
@@ -251,29 +252,62 @@ const fadeIn = keyframes`
 
 const StyledExtendMail = styled(ExtendMail)`
   animation: 0.1s ${fadeIn} ease-out;
-  margin: 2px 6%;
+  margin: 2px 0;
+  max-height: 300px;
+  overflow-y: auto;
+
+  @media (max-width: ${BREAK_POINT_SM}) {
+    margin: 2px 15px;
+  }
+`;
+
+const shrinkStyle = css`
+  top: 0;
+  left: 0;
+  bottom: 0;
+  background-color: black;
+  opacity: 0.1;
+
+  :hover {
+    opacity: 0.2;
+  }
+`;
+
+const MobileShrinkStyle = css`
+  bottom: -20px;
+  border-radius: 50%;
+  background-color: white;
+  border: 1px solid ${VIVID_NAVY_1};
+  padding: 10px;
 `;
 
 const Shrink = styled.div`
-  background-color: white;
-  border: 1px solid ${VIVID_NAVY_1};
-  border-radius: 50%;
   cursor: pointer;
-  height: 20px;
-  padding: 10px;
-  transform: rotate(-90deg);
-  width: 20px;
 
   position: absolute;
-  right: calc(3% - 20px);
-  top: 25px;
+  right: 0;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: grid;
+  place-items: center;
 
-  :hover {
-    background-color: ${LIGHT_CYAN_1};
+  @media (min-width: ${BREAK_POINT_SM}) {
+    ${shrinkStyle}
+  }
+  @media (max-width: ${BREAK_POINT_SM}) {
+    ${MobileShrinkStyle}
+  }
+`;
+
+const ShrinkIcon = styled(Icon_arrow02)`
+  background-color: white;
+  border-radius: 50%;
+  height: 35px;
+  width: 35px;
+  transform: rotate(-90deg);
+
+  @media (max-width: ${BREAK_POINT_SM}) {
+    height: 20px;
+    width: 20px;
   }
 `;
 
@@ -327,41 +361,53 @@ export const Table = ({ data, ...props }) => {
           )}
         </SortableHeaderItem>
       </Header>
-      {sortedDate.map((email) => (
-        <ItemContainer key={email.id} isExtended={extendIDs.includes(email.id)}>
-          <TableItem
-            onClick={() => {
-              if (!extendIDs.includes(email.id)) {
-                setExtendIDs((prev) => prev.concat(email.id));
-              }
-            }}
-          >
-            <StyledIconMailSP />
-            <From isHighlightField={sort.field === SORT_OPTIONS.FROM_FIELD}>
-              <Text>{email.from}</Text>
-              {email.attachment && <StyledClip />}
-              <MobileArchiveDate
+      {sortedDate.map((email) => {
+        const isExtended = extendIDs.includes(email.id);
+        return (
+          <ItemContainer key={email.id} isExtended={isExtended}>
+            <TableItem
+              onClick={() => {
+                if (!isExtended) {
+                  setExtendIDs((prev) => prev.concat(email.id));
+                }
+              }}
+            >
+              <StyledIconMailSP />
+              <From isHighlightField={sort.field === SORT_OPTIONS.FROM_FIELD}>
+                <Text>{email.from}</Text>
+                {email.attachment && <StyledClip />}
+                <MobileArchiveDate
+                  isHighlightField={sort.field === SORT_OPTIONS.DATE_FIELD}
+                >
+                  {dateTimeFormatter(test, email.date)}
+                </MobileArchiveDate>
+                <StyledArrow2 />
+              </From>
+              <To>
+                <Text>{email.to.join(",")}</Text>
+                {email.metadata && <Tag>{email.metadata}</Tag>}
+              </To>
+              <MetaData>
+                {email.metadata && <Tag>{email.metadata}</Tag>}
+              </MetaData>
+              <Subject>{email.subject}</Subject>
+              <Attachment>{email.attachment && <StyledClip />}</Attachment>
+              <ArchiveDate
                 isHighlightField={sort.field === SORT_OPTIONS.DATE_FIELD}
               >
                 {dateTimeFormatter(test, email.date)}
-              </MobileArchiveDate>
-              <StyledArrow2 />
-            </From>
-            <To>
-              <Text>{email.to.join(",")}</Text>
-              {email.metadata && <Tag>{email.metadata}</Tag>}
-            </To>
-            <MetaData>{email.metadata && <Tag>{email.metadata}</Tag>}</MetaData>
-            <Subject>{email.subject}</Subject>
-            <Attachment>{email.attachment && <StyledClip />}</Attachment>
-            <ArchiveDate
-              isHighlightField={sort.field === SORT_OPTIONS.DATE_FIELD}
-            >
-              {dateTimeFormatter(test, email.date)}
-            </ArchiveDate>
-          </TableItem>
-          {extendIDs.includes(email.id) && (
-            <React.Fragment>
+              </ArchiveDate>
+              {isExtended && (
+                <Shrink
+                  onClick={() =>
+                    setExtendIDs((prev) => prev.filter((id) => id !== email.id))
+                  }
+                >
+                  <ShrinkIcon />
+                </Shrink>
+              )}
+            </TableItem>
+            {isExtended && (
               <StyledExtendMail
                 from={email.from}
                 to={email.to}
@@ -371,17 +417,10 @@ export const Table = ({ data, ...props }) => {
                 attachment={email.attachment}
                 date={email.date}
               />
-              <Shrink
-                onClick={() =>
-                  setExtendIDs((prev) => prev.filter((id) => id !== email.id))
-                }
-              >
-                <StyledArrow2 />
-              </Shrink>
-            </React.Fragment>
-          )}
-        </ItemContainer>
-      ))}
+            )}
+          </ItemContainer>
+        );
+      })}
     </Container>
   );
 };

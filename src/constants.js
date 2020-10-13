@@ -1,4 +1,6 @@
-export const BREAK_POINT_SM = "600px";
+export const SMALL_WIDTH = 600;
+
+export const BREAK_POINT_SM = `${SMALL_WIDTH}px`;
 
 export const SORT_OPTIONS = {
   FROM_FIELD: "from",
