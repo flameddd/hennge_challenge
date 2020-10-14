@@ -5,17 +5,15 @@ import { BORDER_COLOR } from "../colors";
 
 const Container = styled.div`
   border-top: 1px solid ${BORDER_COLOR};
-  display: flex;
-`;
+  min-height: 300px;
 
-const Logo = styled.img`
-  height: 125px;
-  margin: 125px auto;
+  display: grid;
+  place-content: center;
 `;
 
 export const EmptyResult = (props) => (
   <Container {...props}>
-    <Logo src={logo} />
+    <img src={logo} />
   </Container>
 );
 

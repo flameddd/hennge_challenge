@@ -7,7 +7,7 @@ const Container = styled.div`
   color: ${SECONDARY_TEXT_COLOR};
   font-size: 18px;
   font-weight: bold;
-  padding: 20px 0 10px;
+  margin: 10px 0;
 `;
 
 export const ResultTitle = ({ count, ...props }) => (

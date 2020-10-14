@@ -50,6 +50,10 @@ const Header = styled.div`
   padding: 10px;
   user-select: none;
 
+  position: sticky;
+  top: 0;
+  z-index: 1;
+
   align-items: center;
   display: grid;
   grid-template-columns: 150px 250px 6fr 1fr;
@@ -58,6 +62,7 @@ const Header = styled.div`
   @media (max-width: ${BREAK_POINT_SM}) {
     display: block;
     font-size: 16px;
+    top: 66px;
 
     > span {
       padding: 0 8px;
@@ -257,7 +262,7 @@ const StyledExtendMail = styled(ExtendMail)`
   overflow-y: auto;
 
   @media (max-width: ${BREAK_POINT_SM}) {
-    margin: 2px 15px;
+    margin: 2px 20px;
   }
 `;
 

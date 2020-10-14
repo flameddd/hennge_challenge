@@ -38,10 +38,13 @@ const Body = styled.div`
 const Time = styled.span``;
 
 function dateToTime(date) {
-  return `${date.getFullYear()}/${date.getMonth()}/${date.getDay()} ${date.toLocaleTimeString(
-    [],
-    { hour12: false, hour: "2-digit", minute: "2-digit" }
-  )}`;
+  return `${date.getFullYear()}/${
+    date.getMonth() + 1
+  }/${date.getDate()} ${date.toLocaleTimeString([], {
+    hour12: false,
+    hour: "2-digit",
+    minute: "2-digit",
+  })}`;
 }
 
 const ExtendMail = ({ from, to, subject, body, date, ...props }) => (

@@ -99,8 +99,29 @@ ref
   - 整理 shrink button
   - 今天弄 react app 吧!
   - extendmail 的 height 記得拿掉
+  - 弄 create react app 吧！要把 filter 的功能弄出來才行！
+  - 我要解決
+    - deaktop container 100%
+    - mobile searchbar width 問題
+- 20201014
+  - 最後的 10%，90 分的力氣
+  - 先解決 mobile searchbar 的問題吧
+  - 到底要做到多好？，可惡　
+  - 更好的位置，就是 mobile 時，變成整行！
+  - 然後要 sticky。 height 要指定，這樣就不會有空白看透過去
+  - mobile 的 animation 好像沒用(有用，後來確認有用)
+  - sticky mobile 問題搞定，沒想到 overflow-x 也會影響
+  - 目前想到就是 datepicker 的行為不夠好
+  - 到時候可以寫寫，弄 mobile 的 scroll 花了一點時間
+  - 又可以說，我一開始是 div div div，但 mobile 的 scroll UX 差
+  - 所以弄了 sticky 效果之類的
 
-要考慮改用 rem font-size
+todos
+- 要考慮改用 rem font-size
+- 記得要 refactor `colors`
+- datepicker 的行為不夠好
+- extendmail 的 icon 都沒放，不知道要不要放
+- 本來想要 mobile extendmail 時，把 tableitem 縮小的，目前沒有好的辦法
 
 
 元件（盡量拆小一點）

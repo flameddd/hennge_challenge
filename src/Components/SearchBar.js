@@ -10,19 +10,28 @@ import "react-dates/lib/css/_datepicker.css";
 import { DayPickerRangeController } from "react-dates";
 import moment from "moment";
 
-import { SMALL_WIDTH } from "../constants";
+import { BREAK_POINT_SM, SMALL_WIDTH } from "../constants";
 
 const Container = styled.div`
-  height: 36px;
+  background-color: white;
+  height: 50px;
+  padding: 8px 0;
+
+  position: sticky;
+  top: 0;
+  z-index: 2;
 `;
 
 const SearchInput = styled.div`
   border: 2px solid ${BORDER_COLOR};
   border-radius: 5px;
   display: flex;
-  height: 36px;
-  width: 300px;
+  width: 320px;
   margin-bottom: 5px;
+
+  @media (max-width: ${BREAK_POINT_SM}) {
+    width: 280px;
+  }
 `;
 
 const Left = styled.div`
@@ -30,6 +39,9 @@ const Left = styled.div`
   flex: 1;
   padding: 10px;
   user-select: none;
+
+  display: flex;
+  align-items: center;
 `;
 
 const DateRange = styled.span`
@@ -50,7 +62,8 @@ const Right = styled.div`
 `;
 
 const Img = styled.img`
-  height: 100%;
+  height: 20px;
+  width: 20px;
   pointer-events: none;
 `;
 
@@ -67,8 +80,8 @@ export const SearchBar = ({ onSearch, ...props }) => {
   const [focusedInput, setFocusedInput] = React.useState("startDate");
 
   return (
-    <Container>
-      <SearchInput {...props}>
+    <Container {...props}>
+      <SearchInput>
         <Left
           ref={inputEl}
           onClick={() => {
