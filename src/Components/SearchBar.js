@@ -69,13 +69,16 @@ const Img = styled.img`
 
 const TODAY = moment();
 
-export const SearchBar = ({ onSearch, ...props }) => {
+function renderDateText(date) {
+  return `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`;
+}
+
+export const SearchBar = ({ onSearch, dateRange, ...props }) => {
   const inputEl = React.useRef(null);
-  const [fromTo, setFromTo] = React.useState([TODAY, TODAY]);
   const [isOpen, setIsOpen] = React.useState(false);
-  const [dateRange, setDateRange] = React.useState({
-    startDate: TODAY,
-    endDate: TODAY,
+  const [datePicker, setDatePicker] = React.useState({
+    startDate: moment(dateRange.from),
+    endDate: moment(dateRange.to),
   });
   const [focusedInput, setFocusedInput] = React.useState("startDate");
 
@@ -86,25 +89,28 @@ export const SearchBar = ({ onSearch, ...props }) => {
           ref={inputEl}
           onClick={() => {
             if (!isOpen) {
-              setDateRange({ startDate: fromTo[0], endDate: fromTo[1] });
+              setDatePicker({
+                startDate: moment(dateRange.from),
+                endDate: moment(dateRange.to),
+              });
               setIsOpen(true);
             }
           }}
         >
           <Img src={icon_calender} />
           <DateRange>
-            {fromTo[0].format("YYYY/M/D")} - {fromTo[1].format("YYYY/M/D")}
+            {renderDateText(dateRange.from)} - {renderDateText(dateRange.to)}
           </DateRange>
         </Left>
         <Right
           onClick={() => {
-            const { startDate, endDate } = dateRange;
+            const { startDate, endDate } = datePicker;
             if (
               startDate &&
               endDate &&
-              (startDate !== fromTo[0] || endDate !== fromTo[1])
+              (startDate.valueOf() !== dateRange.from.valueOf() ||
+                endDate.valueOf() !== dateRange.to.valueOf())
             ) {
-              setFromTo([startDate, endDate]);
               onSearch(startDate.toDate(), endDate.toDate());
             }
           }}
@@ -120,13 +126,11 @@ export const SearchBar = ({ onSearch, ...props }) => {
               setIsOpen(false);
             }
           }}
-          hideKeyboardShortcutsPanel="true"
-          startDate={dateRange.startDate}
-          startDateId="start_date_id"
-          endDate={dateRange.endDate}
-          endDateId="end_date_id"
+          hideKeyboardShortcutsPanel={true}
+          startDate={datePicker.startDate}
+          endDate={datePicker.endDate}
           onDatesChange={({ startDate, endDate }) =>
-            setDateRange({ startDate, endDate })
+            setDatePicker({ startDate, endDate })
           }
           focusedInput={focusedInput}
           onFocusChange={(nextFocusedInput) =>
@@ -142,11 +146,11 @@ export const SearchBar = ({ onSearch, ...props }) => {
 };
 
 SearchBar.propTypes = {
-  onSearch: PropTypes.func,
-};
-
-SearchBar.defaultProps = {
-  onSearch: function () {},
+  onSearch: PropTypes.func.isRequired,
+  dateRange: PropTypes.shape({
+    from: PropTypes.instanceOf(Date),
+    to: PropTypes.instanceOf(Date),
+  }).isRequired,
 };
 
 export default SearchBar;

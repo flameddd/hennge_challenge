@@ -1,3 +1,86 @@
+# Jacky's HENNGE Admission Challenge
+- [REPORT.md](./REPORT.md)
+- [IMPROVEMENTS.md](./IMPROVEMENTS.md)
+
+## about this demo
+- framework: `react` (`create-react-app`)
+- style engine: css-in-js (`styled-components`)
+- others
+  - `storybook` for UI component develop
+
+## Clone and Install
+```
+git clone
+cd Jacky_HENNGE_Challenge
+npm install
+npm start
+```
+
+then visit `http://localhost:3000/`
+
+## Date Set
+- 連結檔案
+- 寫下檔案的日期區間
+
+## Folder structure and File 
+
+```
+\---src
+  |   App.js            // App Entry, Layout
+  |   colors.js         // define color palette
+  |   constants.js      // define constant, enums
+  |   dataset.js        // fake data set for demo 
+  |   
+  +---assets            // image asset from "frontend_resources.zip" 
+  +---Components        // UI components
+  |     EmptyResult.js
+  |     ExtendMail.js
+  |     Layout.js
+  |     Normalize.js
+  |     ResultTitle.js
+  |     SearchBar.js
+  |     Table.js
+  |     
+  +---stories         // storybook
+  \---utils           // utility function
+\---screenshots       // image for README, REPORT and IMPROVEMENTS present
+```
+
+
+# Screenshots  
+
+|![05.jpg](./screenshots/05.jpg)|
+|:----------:|
+|desktop|
+
+|![06.jpg](./screenshots/06.jpg)|
+|:----------:|
+|hover|
+
+|![07.jpg](./screenshots/07.jpg)|
+|:----------:|
+|mail extended|
+
+|![08.jpg](./screenshots/08.jpg)|
+|:----------:|
+|mail extended|
+
+|![09.jpg](./screenshots/09.jpg)|
+|:----------:|
+|date picker|
+
+|![10.jpg](./screenshots/10.jpg)|
+|:----------:|
+|result 0|
+
+
+|![m01.jpg](./screenshots/m01.jpg)|![m02.jpg](./screenshots/m02.jpg)|![m03.jpg](./screenshots/m03.jpg)|
+|:----------:|:----------:|:----------:|
+|mobile|scroll|mail extended|
+||||
+|![m04.jpg](./screenshots/m04.jpg)|![m05.jpg](./screenshots/m05.jpg)|![m06.jpg](./screenshots/m06.jpg)|
+|mail extended|date picker| result 0|
+
 # todos
 - 先看清楚需求
 - 列出 todo
@@ -115,6 +198,8 @@ ref
   - 到時候可以寫寫，弄 mobile 的 scroll 花了一點時間
   - 又可以說，我一開始是 div div div，但 mobile 的 scroll UX 差
   - 所以弄了 sticky 效果之類的
+-20201015
+  - 寫了 readme，接著呢？要寫寫一些 intr
 
 todos
 - 要考慮改用 rem font-size
@@ -122,6 +207,8 @@ todos
 - datepicker 的行為不夠好
 - extendmail 的 icon 都沒放，不知道要不要放
 - 本來想要 mobile extendmail 時，把 tableitem 縮小的，目前沒有好的辦法
+- bug? default searchbar from date, to date
+- searchbar render 好多次，應該要 render memo
 
 
 元件（盡量拆小一點）

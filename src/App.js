@@ -30,7 +30,7 @@ const StyledTable = styled(Table)`
 function App() {
   const [dateRange, setDateRange] = React.useState({
     from: new Date(2019, 10, 31, 0, 30, 0),
-    to: new Date(2020, 1, 1, 0, 0, 0),
+    to: new Date(2020, 0, 10, 0, 0, 0),
   });
 
   const filtedData = data.filter(
@@ -40,7 +40,10 @@ function App() {
   return (
     <React.Fragment>
       <Container className="App">
-        <SearchBar onSearch={(from, to) => setDateRange({ from, to })} />
+        <SearchBar
+          dateRange={dateRange}
+          onSearch={(from, to) => setDateRange({ from, to })}
+        />
         <ResultTitle count={filtedData.length} />
         {filtedData.length === 0 ? (
           <EmptyResult />
