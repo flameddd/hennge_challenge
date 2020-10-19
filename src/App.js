@@ -29,13 +29,18 @@ const StyledTable = styled(Table)`
 
 function App() {
   const [dateRange, setDateRange] = React.useState({
-    from: new Date(2019, 10, 31, 0, 30, 0),
-    to: new Date(2020, 0, 10, 0, 0, 0),
+    from: new Date(2019, 11, 31),
+    to: new Date(2020, 0, 3),
   });
 
-  const filtedData = data.filter(
-    (email) => email.date >= dateRange.from && email.date <= dateRange.to
-  );
+  const filtedData = data.filter(({ date }) => {
+    const mailDate = new Date(
+      date.getFullYear(),
+      date.getMonth(),
+      date.getDate()
+    );
+    return mailDate >= dateRange.from && mailDate <= dateRange.to;
+  });
 
   return (
     <React.Fragment>
@@ -48,7 +53,7 @@ function App() {
         {filtedData.length === 0 ? (
           <EmptyResult />
         ) : (
-          <StyledTable data={filtedData} />
+          <StyledTable data={filtedData} toDate={dateRange.to} />
         )}
       </Container>
     </React.Fragment>

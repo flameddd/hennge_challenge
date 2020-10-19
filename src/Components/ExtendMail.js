@@ -11,7 +11,7 @@ const Container = styled.div`
 
 const Subject = styled.h1`
   border-bottom: 1px solid ${BORDER_COLOR};
-  font-size: 18px;
+  font-size: 1.125rem;
   font-weight: bold;
   line-height: 26px;
   margin: 0;

@@ -5,7 +5,7 @@ import { SECONDARY_TEXT_COLOR } from "../colors";
 
 const Container = styled.div`
   color: ${SECONDARY_TEXT_COLOR};
-  font-size: 18px;
+  font-size: 1.125rem;
   font-weight: bold;
   margin: 10px 0;
 `;

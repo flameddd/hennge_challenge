@@ -12,15 +12,14 @@ import ExtendMail from "./ExtendMail";
 import {
   BORDER_COLOR,
   WHITE_1,
+  WHITE_2,
+  WHITE_3,
   SECONDARY_TEXT_COLOR,
   VIVID_NAVY_1,
-  WHITE_4,
-  GRAY_4,
+  GRAY_1,
   BLACK_1,
   LIGHT_BLUE_1,
 } from "../colors";
-
-const test = new Date(2020, 0, 3, 0, 20, 0);
 
 const svgFillColor = css`
   polygon {
@@ -42,11 +41,11 @@ const ellipsisText = css`
 const Container = styled.div``;
 
 const Header = styled.div`
-  background-color: ${WHITE_1};
+  background-color: ${WHITE_3};
   border-bottom: 1px solid ${BORDER_COLOR};
   border-top: 1px solid ${BORDER_COLOR};
   color: ${SECONDARY_TEXT_COLOR};
-  font-size: 18px;
+  font-size: 1.125rem;
   padding: 10px;
   user-select: none;
 
@@ -61,7 +60,6 @@ const Header = styled.div`
 
   @media (max-width: ${BREAK_POINT_SM}) {
     display: block;
-    font-size: 16px;
     top: 66px;
 
     > span {
@@ -76,6 +74,8 @@ const Header = styled.div`
 
 const SortableHeaderItem = styled.span`
   cursor: pointer;
+  overflow: hidden;
+  white-space: nowrap;
 
   ${(props) => props.isHighlightField && fontBoldStyle}
 `;
@@ -108,8 +108,6 @@ const From = styled(Cell)`
   }
 
   @media (max-width: ${BREAK_POINT_SM}) {
-    font-size: 18px;
-
     grid-area: mailFrom;
 
     display: grid;
@@ -124,10 +122,10 @@ const From = styled(Cell)`
 `;
 
 const Tag = styled.div`
-  background-color: ${GRAY_4};
+  background-color: ${GRAY_1};
   border-radius: 5px;
-  color: white;
-  font-size: 16px;
+  color: ${WHITE_1};
+  font-size: 1rem;
   font-weight: bold;
   padding: 0 4px;
 
@@ -141,8 +139,6 @@ const To = styled(Cell)`
   }
 
   @media (max-width: ${BREAK_POINT_SM}) {
-    font-size: 18px;
-
     grid-area: mailTo;
 
     align-items: center;
@@ -157,6 +153,7 @@ const To = styled(Cell)`
 `;
 
 const Subject = styled(Cell)`
+  font-size: 1.25rem;
   @media (max-width: ${BREAK_POINT_SM}) {
     grid-area: mailSubject;
   }
@@ -176,12 +173,12 @@ const TableItem = styled.div`
   grid-column-gap: 20px;
   align-items: center;
 
-  font-size: 20px;
+  font-size: 1.25rem;
   cursor: pointer;
   padding: 10px;
 
   :hover {
-    background-color: ${WHITE_4};
+    background-color: ${WHITE_2};
     color: ${VIVID_NAVY_1};
 
     path {
@@ -198,6 +195,7 @@ const TableItem = styled.div`
       "mailSubject mailSubject";
     grid-gap: 5px;
 
+    font-size: 1.125rem;
     padding: 10px;
 
     > ${Attachment}, ${MetaData}, ${ArchiveDate} {
@@ -217,7 +215,7 @@ const StyledArrow = styled(Icon_arrow01)`
 
   ${svgFillColor}
 
-  ${(props) => props.isDESC && "transform: rotate(180deg);"}
+  ${(props) => props.$isDESC && "transform: rotate(180deg);"}
 `;
 
 const StyledIconMailSP = styled(Icon_mail_sp)`
@@ -281,7 +279,7 @@ const shrinkStyle = css`
 const MobileShrinkStyle = css`
   bottom: -20px;
   border-radius: 50%;
-  background-color: white;
+  background-color: ${WHITE_1};
   border: 1px solid ${VIVID_NAVY_1};
   padding: 10px;
 `;
@@ -304,7 +302,7 @@ const Shrink = styled.div`
 `;
 
 const ShrinkIcon = styled(Icon_arrow02)`
-  background-color: white;
+  background-color: ${WHITE_1};
   border-radius: 50%;
   height: 35px;
   width: 35px;
@@ -316,7 +314,7 @@ const ShrinkIcon = styled(Icon_arrow02)`
   }
 `;
 
-export const Table = ({ data, ...props }) => {
+export const Table = ({ data, toDate, ...props }) => {
   const [sort, setSort] = React.useState({
     field: SORT_OPTIONS.DATE_FIELD,
     orderBy: SORT_OPTIONS.ORDER_BY_DESC,
@@ -351,7 +349,9 @@ export const Table = ({ data, ...props }) => {
         >
           From{" "}
           {sort.field === SORT_OPTIONS.FROM_FIELD && (
-            <StyledArrow isDESC={sort.orderBy === SORT_OPTIONS.ORDER_BY_DESC} />
+            <StyledArrow
+              $isDESC={sort.orderBy === SORT_OPTIONS.ORDER_BY_DESC}
+            />
           )}
         </SortableHeaderItem>
         <span>To</span>
@@ -362,7 +362,9 @@ export const Table = ({ data, ...props }) => {
         >
           Date{" "}
           {sort.field === SORT_OPTIONS.DATE_FIELD && (
-            <StyledArrow isDESC={sort.orderBy === SORT_OPTIONS.ORDER_BY_DESC} />
+            <StyledArrow
+              $isDESC={sort.orderBy === SORT_OPTIONS.ORDER_BY_DESC}
+            />
           )}
         </SortableHeaderItem>
       </Header>
@@ -384,7 +386,7 @@ export const Table = ({ data, ...props }) => {
                 <MobileArchiveDate
                   isHighlightField={sort.field === SORT_OPTIONS.DATE_FIELD}
                 >
-                  {dateTimeFormatter(test, email.date)}
+                  {dateTimeFormatter(toDate, email.date)}
                 </MobileArchiveDate>
                 <StyledArrow2 />
               </From>
@@ -400,7 +402,7 @@ export const Table = ({ data, ...props }) => {
               <ArchiveDate
                 isHighlightField={sort.field === SORT_OPTIONS.DATE_FIELD}
               >
-                {dateTimeFormatter(test, email.date)}
+                {dateTimeFormatter(toDate, email.date)}
               </ArchiveDate>
               {isExtended && (
                 <Shrink
@@ -442,10 +444,12 @@ Table.propTypes = {
       date: PropTypes.instanceOf(Date),
     })
   ),
+  toDate: PropTypes.instanceOf(Date),
 };
 
 Table.defaultProps = {
   data: [],
+  toDate: new Date(),
 };
 
 export default Table;

@@ -13,7 +13,7 @@ const Container = styled.div`
 
 export const EmptyResult = (props) => (
   <Container {...props}>
-    <img src={logo} />
+    <img src={logo} alt="Hennge's Logo" />
   </Container>
 );
 

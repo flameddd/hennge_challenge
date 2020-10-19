@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 import icon_calender from "../assets/icon_calender.svg";
 import icon_search from "../assets/icon_search.svg";
-import { BORDER_COLOR, WHITE_1 } from "../colors";
+import { BORDER_COLOR, WHITE_1, WHITE_3 } from "../colors";
 
 import "react-dates/initialize";
 import "react-dates/lib/css/_datepicker.css";
@@ -13,7 +13,7 @@ import moment from "moment";
 import { BREAK_POINT_SM, SMALL_WIDTH } from "../constants";
 
 const Container = styled.div`
-  background-color: white;
+  background-color: ${WHITE_1};
   height: 50px;
   padding: 8px 0;
 
@@ -45,13 +45,13 @@ const Left = styled.div`
 `;
 
 const DateRange = styled.span`
-  font-size: 18px;
+  font-size: 1.125rem;
   margin-left: 10px;
   pointer-events: none;
 `;
 
 const Right = styled.div`
-  background-color: ${WHITE_1};
+  background-color: ${WHITE_3};
   border-left: 2px solid ${BORDER_COLOR};
   cursor: pointer;
   flex-grow: 0;
@@ -97,7 +97,7 @@ export const SearchBar = ({ onSearch, dateRange, ...props }) => {
             }
           }}
         >
-          <Img src={icon_calender} />
+          <Img src={icon_calender} alt="calender icon" />
           <DateRange>
             {renderDateText(dateRange.from)} - {renderDateText(dateRange.to)}
           </DateRange>
@@ -115,11 +115,12 @@ export const SearchBar = ({ onSearch, dateRange, ...props }) => {
             }
           }}
         >
-          <Img src={icon_search} />
+          <Img src={icon_search} alt="search icon" />
         </Right>
       </SearchInput>
       {isOpen && (
         <DayPickerRangeController
+          minimumNights={0}
           numberOfMonths={window.innerWidth < SMALL_WIDTH ? 1 : 2}
           onOutsideClick={(event) => {
             if (event.target !== inputEl.current) {
@@ -130,7 +131,10 @@ export const SearchBar = ({ onSearch, dateRange, ...props }) => {
           startDate={datePicker.startDate}
           endDate={datePicker.endDate}
           onDatesChange={({ startDate, endDate }) =>
-            setDatePicker({ startDate, endDate })
+            setDatePicker({
+              startDate: startDate.hour(0),
+              endDate: endDate ? endDate.hour(0) : startDate.hour(0),
+            })
           }
           focusedInput={focusedInput}
           onFocusChange={(nextFocusedInput) =>

@@ -10,8 +10,8 @@
 
 ## Clone and Install
 ```
-git clone
-cd Jacky_HENNGE_Challenge
+git clone https://github.com/flameddd/hennge_challenge
+cd hennge_challenge
 npm install
 npm start
 ```
@@ -19,8 +19,9 @@ npm start
 then visit `http://localhost:3000/`
 
 ## Date Set
-- 連結檔案
-- 寫下檔案的日期區間
+- [dataset.js](./src/dataset.js)
+- email date range from `2019/12/31 0:30` to `2020/1/3 0:20`
+- filter **Out of above date range** to see **Empty Result** page.
 
 ## Folder structure and File 
 
@@ -40,8 +41,7 @@ then visit `http://localhost:3000/`
   |     ResultTitle.js
   |     SearchBar.js
   |     Table.js
-  |     
-  +---stories         // storybook
+  | 
   \---utils           // utility function
 \---screenshots       // image for README, REPORT and IMPROVEMENTS present
 ```
@@ -202,13 +202,21 @@ ref
   - 寫了 readme，接著呢？要寫寫一些 intr
 
 todos
-- 要考慮改用 rem font-size
-- 記得要 refactor `colors`
+- remove useless screenshots
 - datepicker 的行為不夠好
 - extendmail 的 icon 都沒放，不知道要不要放
+- extendmail 的 metadata, attach 還沒放、不知道要怎麼放
+  - 我要放 icon 嗎？
 - 本來想要 mobile extendmail 時，把 tableitem 縮小的，目前沒有好的辦法
-- bug? default searchbar from date, to date
-- searchbar render 好多次，應該要 render memo
+- (done) `isDESC` 警告
+- (done) filter 邏輯有問題，３號沒包含全部
+- (done) 要考慮改用 rem font-size
+- (done) refactor `colors`
+- (done) storybook 可能要整理一下
+- (done) bug? default searchbar from date, to date
+- (done) searchbar render 好多次，應該要 render memo
+- (done) filtedData 可以被 memnorize 過 (想了一下，不需要。沒有 trigger waste 的情況)
+- (done) img elements must have an alt prop, either with meaningful text, or an empty string for decorative images  jsx-a11y/alt-text
 
 
 元件（盡量拆小一點）
