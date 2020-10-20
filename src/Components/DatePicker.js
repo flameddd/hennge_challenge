@@ -73,7 +73,7 @@ function renderDateText(date) {
   return `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`;
 }
 
-export const SearchBar = ({ onSearch, dateRange, ...props }) => {
+export const DatePicker = ({ onSearch, dateRange, ...props }) => {
   const inputEl = React.useRef(null);
   const [isOpen, setIsOpen] = React.useState(false);
   const [datePicker, setDatePicker] = React.useState({
@@ -149,7 +149,7 @@ export const SearchBar = ({ onSearch, dateRange, ...props }) => {
   );
 };
 
-SearchBar.propTypes = {
+DatePicker.propTypes = {
   onSearch: PropTypes.func.isRequired,
   dateRange: PropTypes.shape({
     from: PropTypes.instanceOf(Date),
@@ -157,4 +157,4 @@ SearchBar.propTypes = {
   }).isRequired,
 };
 
-export default SearchBar;
+export default DatePicker;

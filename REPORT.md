@@ -128,6 +128,6 @@ At first, I chose `react-date-range`, because `react-dates` depend on `Moment.js
 - Usually, `Moment.js` is overhead for web.
 - (`react-date-range` depend on `date-fns`)
 
-Then, I find out `react-date-range` are **NOT** able to replace/customize its appearance easily.  
+Then, I find out `react-date-range` are **NOT** able to replace/customize its **appearance** easily.  
 
 So, I switch back to `react-dates`.

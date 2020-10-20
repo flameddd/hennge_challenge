@@ -1,7 +1,7 @@
 import React from "react";
 
 import ResultTitleComponent from "../Components/ResultTitle.js";
-import SearchBarComponent from "../Components/SearchBar.js";
+import DatePickerComponent from "../Components/DatePicker.js";
 import EmptyResultComponent from "../Components/EmptyResult.js";
 import TableComponent from "../Components/Table.js";
 import ExtendMailComponent from "../Components/ExtendMail";
@@ -12,7 +12,7 @@ export default {
   title: "Components",
   component: ResultTitleComponent,
   subcomponents: [
-    SearchBarComponent,
+    DatePickerComponent,
     EmptyResultComponent,
     TableComponent,
     ExtendMailComponent,
@@ -20,13 +20,13 @@ export default {
 };
 
 export const ResultTitle = (args) => <ResultTitleComponent {...args} />;
-export const SearchBar = (args) => {
+export const DatePicker = (args) => {
   const [dateRange, setDateRange] = React.useState({
     from: new Date(2019, 10, 31, 0, 30, 0),
     to: new Date(2020, 0, 10, 0, 0, 0),
   });
   return (
-    <SearchBarComponent
+    <DatePickerComponent
       {...args}
       dateRange={dateRange}
       onSearch={(from, to) => setDateRange({ from, to })}

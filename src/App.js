@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import SearchBar from "./Components/SearchBar.js";
+import DatePicker from "./Components/DatePicker.js";
 import ResultTitle from "./Components/ResultTitle.js";
 import EmptyResult from "./Components/EmptyResult.js";
 import Table from "./Components/Table.js";
@@ -45,7 +45,7 @@ function App() {
   return (
     <React.Fragment>
       <Container className="App">
-        <SearchBar
+        <DatePicker
           dateRange={dateRange}
           onSearch={(from, to) => setDateRange({ from, to })}
         />

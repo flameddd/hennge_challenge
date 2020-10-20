@@ -8,7 +8,6 @@ import { ReactComponent as Icon_mail_sp } from "../assets/icon_mail_sp.svg";
 import { BREAK_POINT_SM, SORT_OPTIONS } from "../constants";
 import { dateTimeFormatter, sortMail } from "../utils";
 import ExtendMail from "./ExtendMail";
-
 import {
   BORDER_COLOR,
   WHITE_1,
@@ -315,11 +314,19 @@ const ShrinkIcon = styled(Icon_arrow02)`
 `;
 
 export const Table = ({ data, toDate, ...props }) => {
+  const prevDataRef = React.useRef();
   const [sort, setSort] = React.useState({
     field: SORT_OPTIONS.DATE_FIELD,
     orderBy: SORT_OPTIONS.ORDER_BY_DESC,
   });
   const [extendIDs, setExtendIDs] = React.useState([]);
+
+  React.useEffect(() => {
+    if (prevDataRef.current !== data) {
+      setExtendIDs([]); // shrink all emails
+      prevDataRef.current = data;
+    }
+  }, [data]);
 
   const sortedDate = React.useMemo(
     () =>
