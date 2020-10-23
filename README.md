@@ -1,4 +1,60 @@
-# Jacky's HENNGE Admission Challenge
+# For anyone looking for reference.
+1. I did **NOT** **POST** API successfully. (2020/10)
+2. I believe I created a CORRECT RFC6238 token
+    - I was able to generate exactly same **"Table 1: TOTP Table"** TOTP token.
+
+But, I still got `Access denied: Invalid token, wrong code`.
+- maybe I am wrong, but I already give up to submit my demo.
+- I start to think **MAYBE, THIS IS NOT MY PROBLEM**.
+- hope someone POST successfully, and prove me wrong, slap my face
+
+You can find some ppl asking or public their code on github
+- google some key word
+- github search key word
+
+And I think **glassdoor** is also **worth** to read (not relate this challenge)
+- https://www.glassdoor.com/Interview/HENNGE-Interview-Questions-E1276040.htm
+- (Use **browser's private mode** to pretend first time visitor.)
+
+# About secrets
+If you read the RFC6238 document. The doc say
+> The test token shared secret uses the ASCII string value "12345678901234567890".
+
+A lot of ppl confusing:
+- What is **12345678901234567890**, and
+- Why using `seed64` in the document's sample code ?
+
+```java
+String seed64 = "3132333435363738393031323334353637383930" +
+         "3132333435363738393031323334353637383930" +
+         "3132333435363738393031323334353637383930" +
+         "31323334";
+```
+
+So
+- **12345678901234567890** is (token shared) secret, just a random string.
+- **3132333435363738393031323334353637383930** is **12345678901234567890**'s ASCII HEX encoded
+- for `HMAC-SHA512`, we need 64 bytes seed. Just **repeat** the string, then we got **seed64**
+  - (hex encode: Encode each **byte** as two hexadecimal characters.)
+
+```javascript
+// nodejs
+Buffer("12345678901234567890", 'ascii').toString('hex')
+// 3132333435363738393031323334353637383930
+```
+
+If you are using 3rd parity library
+- I think library will do the ASCII hex encode for you.
+- You can use **12345678901234567890** as secret to test, to generate same **"Table 1: TOTP Table"**'s result.
+  - **"Table 1: TOTP Table"**'s first col "Time (sec)" is "Unix epoch". when you setting lib's config, maybe is "UNIX time * 1000", e.x: "59 * 1000" (depend on your language or library.)
+- read your 3rd parity library's test and source code may help you more understand that library.
+
+
+---------------------------------------------------------
+---------------------------------------------------------
+---------------------------------------------------------
+---------------------------------------------------------
+# Jacky's HENNGE Admission Challenge 003 (**unsubmitted**)
 - [REPORT.md](./REPORT.md)
 - [IMPROVEMENTS.md](./IMPROVEMENTS.md)
 
