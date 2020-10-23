@@ -5,8 +5,8 @@
 
 But, I still got `Access denied: Invalid token, wrong code`.
 - maybe I am wrong, and I already give up to submit my demo.
-- I start to think maybe, this is not my problem.
-- hope someone POST successfully, and prove me wrong, slap my face
+  - (I start to think maybe, this is not my problem.)
+- hope someone POST successfully, and prove me wrong.
 
 You can find some ppl asking or public their code on github
 - google some key word
