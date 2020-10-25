@@ -3,7 +3,7 @@
 2. I believe I created a CORRECT RFC6238 token
     - I was able to generate exactly same **"Table 1: TOTP Table"** TOTP token.
 
-But, I have still got `Access denied: Invalid token, wrong code`.
+But, I still got `Access denied: Invalid token, wrong code`.
 - maybe I am wrong, and I give up to submit my demo.
   - (I start to think maybe, this is not my problem.)
 - hope someone POST successfully, and prove me wrong.
